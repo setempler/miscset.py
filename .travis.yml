@@ -12,3 +12,10 @@ script:
   
 after_success:
   - codecov
+
+deploy:
+  provider: pypi
+  user: __token__
+  password: $AUTH_PYPI
+  on:
+    tags: true
