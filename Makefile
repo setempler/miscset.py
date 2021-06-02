@@ -20,6 +20,10 @@ install:
 test:
 	@pytest -v
 
+.PHONY: docs
+docs:
+	@cd docs && make html
+
 .PHONY: build
 build:
 	@python -m build --sdist

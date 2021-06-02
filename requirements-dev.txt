@@ -4,3 +4,5 @@ travis
 build
 codecov
 pytest-cov
+sphinx
+sphinxcontrib-napoleon
