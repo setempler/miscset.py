@@ -7,11 +7,9 @@ venv := $(shell basename "$$VIRTUAL_ENV")
 init:
 	@echo -n "virtual environment '$(venv)' ... "
 	@[ -z $$VIRTUAL_ENV ] && echo please check && exit 1 || echo ok
+	@pip install --upgrade pip
 	@pip install -r requirements.txt
-	@pip install pytest
-	@pip install twine
-	@pip install travis
-	@pip install build
+	@pip install -r requirements-dev.txt
 
 
 .PHONY: install

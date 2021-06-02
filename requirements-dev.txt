@@ -1,0 +1,6 @@
+pytest
+twine
+travis
+build
+codecov
+pytest-cov
