@@ -12,7 +12,7 @@ setuptools.setup(
     version = __version_string__,
     author = "Sven Templer",
     author_email = "sven.templer@gmail.com",
-    description = "Miscellaneous python methods.",
+    description = "Miscellaneous set of helpful methods.",
     long_description = long_description,
     long_description_content_type = "text/markdown",
     url = "https://github.com/setempler/miscset.py",
