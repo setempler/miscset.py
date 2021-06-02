@@ -1,6 +1,6 @@
 # miscset
 
-[![Build Status](https://travis-ci.com/setempler/miscset.py.svg?branch=master)](https://travis-ci.com/setempler/miscset.py) 
+[![Build Status](https://travis-ci.com/setempler/miscset.py.svg?branch=main)](https://travis-ci.com/setempler/miscset.py) 
 [![codecov.io](https://codecov.io/github/setempler/miscset.py/coverage.svg?branch=master)](https://codecov.io/github/setempler/miscset.py)
 [![pypi](https://img.shields.io/pypi/v/miscset.svg)](https://pypi.org/project/miscset/)
 
