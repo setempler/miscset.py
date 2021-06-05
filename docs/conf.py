@@ -12,6 +12,7 @@
 #
 import os
 import sys
+import miscset
 sys.path.insert(0, os.path.abspath('../'))
 
 
@@ -22,7 +23,7 @@ copyright = '2021, Sven E. Templer'
 author = 'Sven E. Templer'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.0'
+release = miscset.version_string
 
 
 # -- General configuration ---------------------------------------------------
