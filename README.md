@@ -29,7 +29,7 @@ print(miscset.sh.run("uname").stdout)
 # >>> Darwin
 ```
 
-See all method descriptions and a full feature list on [readthedocs.org](https://readthedocs.org).
+See all method descriptions and a full feature list on [readthedocs.org](https://miscset.readthedocs.org).
 
 ## Installation
 
