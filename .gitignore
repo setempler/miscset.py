@@ -3,5 +3,6 @@
 /dist
 /*.egg-info
 /*.egg
-/*.venv
-/docs/_*
+/.venv*
+/docs/_build
+/docs/_autosummary
