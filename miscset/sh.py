@@ -1,7 +1,10 @@
 # miscset.sh
 
 
-"""Shell subprocesses."""
+"""Shell subprocesses.
+
+Features the `run` function that
+"""
 
 
 import os
@@ -14,7 +17,12 @@ logger = logging.getLogger()
 
 
 class AnsiColor:
-    """A selection of shell ansi color strings"""
+    """A selection of shell ansi color strings.
+
+    Insert these values into strings to (de-)colorize shell outputs in a terminal.
+
+    See also: https://en.wikipedia.org/wiki/ANSI_escape_code#Colors
+    """
     reset       = "\033[0m"
     black       = "\033[0;30m"
     dark_gray   = "\033[1;30m"
@@ -36,11 +44,13 @@ class AnsiColor:
 
 def print_colored(text, color, reset = True):
     """Print text to a console with ansi coloring.
-    
+
+    Print a string, but add an ANSI color sequence.
+
     Args:
-        text (string): A text to send to print.
-        color (string): An ansi color to decorate `text` with.
-        reset (boolean): Clear decoration at the end of `text`.
+        text (str): A text to send to print.
+        color (str): An ansi color to decorate `text` with.
+        reset (bool): Clear decoration at the end of `text`.
     """
     text = color + text
     if reset:
@@ -48,17 +58,29 @@ def print_colored(text, color, reset = True):
     print(text)
 
 
-def run(cmd, remote = None, user = None, piped = True, verbose = False, env = None):
-    """Run a (series of) shell command(s) as user at a host
-    
+def run(cmd, remote = None, user = None, piped = True, env = None):
+    """Run a (series of) shell command(s) as user at a host.
+
+    Wraps the `subprocess.run` method by adding features like:
+
+    - send command as standard input to a runner, which is either
+        - the local shell `bash -s` of the current user
+        - the local shell using a different user with `sudo -u <user>`, or
+        - the remote shell using a specified user login at a host via `ssh <user>@<host>`
+    - supply environment paths exported in the shell prior to executing the command
+    - return error code, stdout, stderr to a logger from the `logging` module as debug message
+
     Args:
-        cmd (string): A string used as shell command.
-        remote (string): A name of a remote server, if given ssh is invoked.
-        user (string): A user name to connect with ssh to a `remote` server or
+        cmd (str): A string used as shell command.
+        remote (str): A name of a remote server, if given ssh is invoked.
+        user (str): A user name to connect with ssh to a `remote` server or
             switch to using sudo for localhost.
-        piped (boolean): Enable using `bash -s` to pipe commands to shell.
-        verbose (int): Verbosity level.
-        env (string): Folder paths to use and export in PATH shell variable.
+        piped (bool): Enable using `bash -s` to pipe commands to shell.
+        env (str): Folder paths to use and export in PATH shell variable.
+
+    Returns:
+        :py:class:`subprocess.CompletedProcess`: An object holding args, returncode and stdout/stderr values
+            from the executed subprocess.
     """
     if env is None:
         env = []

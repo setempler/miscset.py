@@ -3,6 +3,9 @@
 SHELL := /usr/local/bin/bash
 venv := $(shell basename "$$VIRTUAL_ENV")
 
+.PHONY: all
+all: init test install docs
+
 .PHONY: init
 init:
 	@echo -n "virtual environment '$(venv)' ... "
@@ -10,7 +13,6 @@ init:
 	@pip install --upgrade pip
 	@pip install -r requirements.txt
 	@pip install -r requirements-dev.txt
-
 
 .PHONY: install
 install:
@@ -42,6 +44,8 @@ upload:
 clean:
 	@find . -type f -iname '*.pyc' -delete
 	@find . -type d -iname __pycache__ -delete
+	@rm -rf .pytest_cache
+	@rm -rf docs/_build docs/_autosummary
 	@rm -rf build/
 	@rm -rf dist/
 	@rm -rf *.egg-info/

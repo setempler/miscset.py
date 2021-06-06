@@ -9,7 +9,7 @@ with open("README.md", "r", encoding = "utf-8") as fs:
 
 setuptools.setup(
     name = "miscset",
-    version = __version_string__,
+    version = version_string_,
     author = "Sven Templer",
     author_email = "sven.templer@gmail.com",
     description = "Miscellaneous set of helpful methods.",

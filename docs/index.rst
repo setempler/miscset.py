@@ -1,21 +1,17 @@
-miscset documentation
-=====================
-
-Welcome to the documentation of the *miscset* python package.
-
-Download the package via::
-
-   pip install miscset
-
-from https://pypi.org/project/miscset.
-
-Please find the source code on github at https://github.com/setempler/miscset.py.
+.. mdinclude:: ../README.md
 
 Content
-^^^^^^^
+-------
 
-.. toctree::
-   :maxdepth: 2
+Browse the module for submodules, functions, classes and other objects:
 
-   methods
-   tables
+.. autosummary::
+   :toctree: _autosummary
+   :template: module.rst
+   :recursive:
+
+   miscset
+
+See the index of all objects at :ref:`genindex`.
+
+Search the content at :ref:`search`.
