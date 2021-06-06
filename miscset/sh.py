@@ -3,7 +3,8 @@
 
 """Shell subprocesses.
 
-Features the `run` function that
+Features an ANSI shell colors and an extended
+wrapper for the :py:func:`subprocess.run` method.
 """
 
 
