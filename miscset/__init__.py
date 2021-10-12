@@ -53,5 +53,7 @@ logging.getLogger(__name__).addHandler(logging.NullHandler())
 from . import dt
 from . import io
 from . import sh
+from . import files
+from . import tables
 from . import version
 
