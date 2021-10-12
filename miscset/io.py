@@ -1,6 +1,3 @@
-# miscset.io
-
-
 """File and other stream i/o methods.
 
 Writing to
@@ -22,58 +19,75 @@ import os
 import sys
 import json
 import yaml
+import pandas
+import exifread
+import tifffile
 import logging
 
 
 logger = logging.getLogger()
+"""A logger enabled by the logging module."""
 
 
-def write(text, path):
-    """Write text to a file.
+### input
 
-    A file at a path is opened writable,
-    and the text from a string variable is inserted.
 
+def read_txt(path, *args, **kwargs):
+    """Read text as string from a file.
+    
     Args:
-        text (str): Text to write to a file at `path`.
-        path (str): File path.
+        path (str): A path to a file.
+        *args, **kwargs: Any other argument passed to `open`,
+            such as mode, encoding, etc.
+
+    Returns:
+        str: The text (or bytestring, depending on the mode selected)
+            from the selected file.
     """
-    fs = open(path, "w")
-    fs.write(text)
+    fs = open(path, *args, **kwargs)
+    text = fs.read()
     fs.close()
-    return
+    return text
 
 
-def write_stderr(text):
-    """Write text to standard error of the console.
-
-    A text string is written to the system standard error stream.
-
-    Args:
-        text (str): A text to write to stderr.
-    """
-    sys.stderr.write(text)
-    sys.stderr.flush()
-    return
-
-
-def read_lines(path, mode = "r"):
+def read_lines(path, strip = os.linesep, *args, **kwargs):
     """Read text as lines from a file.
 
-    A file is read line by line and parsed as a list of string.
+    A file is read line by line and parsed as a list of strings.
 
     Args:
         path (str): File path.
-        mode (str): File mode for `open`.
+        strip (str): Characters to strip from the end
+            of each line. `None` to skip stripping.
+        *args, **kwargs: Any other argument passed to `open`,
+            such as mode, encoding, etc.
 
     Returns:
         list: Lines read from the file as a list of strings.
     """
-    fs = open(path, mode)
+    fs = open(path, *args, **kwargs)
     lines = fs.readlines()
     fs.close()
-    lines = [line.rstrip(os.linesep) for line in lines]
+    if strip is not None:
+        lines = [line.rstrip(strip) for line in lines]
     return lines
+
+
+def read_json(path):
+    """Read a JSON file.
+
+    Read a JSON formatted file into a dictionary object.
+
+    Args:
+        path (str): File path to JSON formatted file.
+
+    Returns:
+        dict: Content of a JSON file parsed as dictionary.
+    """
+    fs = open(path, "r")
+    d = json.load(fs)
+    fs.close()
+    return d
 
 
 def read_yaml(path):
@@ -102,48 +116,149 @@ def read_yaml(path):
     return d
 
 
-def read_json(path):
-    """Read a JSON file.
-
-    Read a JSON formatted file into a dictionary object.
-
-    Args:
-        path (str): File path to JSON formatted file.
-
-    Returns:
-        dict: Content of a JSON file parsed as dictionary.
-    """
-    fs = open(path, "r")
-    d = json.load(fs)
-    fs.close()
-    return d
-
-
-def read_csv(path, sep = ","):
+def read_csv(path, *args, **kwargs):
     """Read a CSV file.
 
-    Read a separated value file into an array of
-    fields per line.
+    Parse a csv file to a pandas DataFrame.
 
     Args:
         path (str): File path.
-        sep (str): A field separator, such as ","
+        *args, **kwargs: Arguments passed to `pandas.read_csv`.
 
     Returns:
-        list: A list of fields per line.
+        DataFrame: A table containing the values read from the file.
     """
-    csv = []
-    lines = read_lines(path)
-    for line in lines:
-        fields = line.split(sep)
-        csv.append(fields)
+    csv = pandas.read_csv(path, *args, **kwargs)
     return csv
+
+
+def read_xl(path, *args, **kwargs):
+    """Read any Excel file.
+
+
+    Args:
+        path (str): File path.
+        *args, **kwargs: Arguments passed to `pandas.read_excel`.
+
+    Returns:
+        DataFrame: A table containing the values read from the file's selected sheet.
+    """
+    xl = pandas.read_excel(path, *args, **kwargs)
+    return xl
+
+
+def read_tiff(path):
+    """Read TIFF image using tifffile.
+    
+    Args:
+        path (str): File path to a TIFF file.
+    """
+    img = tifffile.imread(path)
+    return img
+
+
+def read_tiff_tags(path, parser = "tifffile", prefix = False):
+    """Read TIFF metadatad.
+    
+    Args:
+        path (str): Path to a TIFF file.
+        parser (str): Parser to use for reading the file metadata with.
+            One of 'tifffile' or 'exifread'.
+    
+    Returns:
+        tbd
+    """
+    if parser == "tifffile":
+        tags = {}
+        with tifffile.TiffFile(path) as tif:
+            for i, page in enumerate(tif.pages):
+                for j, tag in enumerate(page.tags):
+                    key = str(tag.name)
+                    if prefix:
+                        key = ".".join([str(i), str(j), key])
+                    tags[key] = tag.value
+        return tags
+    elif parser == "exifread":
+        f = open(path, 'rb')
+        return exifread.process_file(f)
+    else:
+        raise Exception("There is no such parser")
+
+
+### output
+
+
+def write_txt(text, path):
+    """Write text to a file.
+
+    A file at a path is opened writable,
+    and the text from a string variable is inserted.
+
+    Args:
+        text (str): Text to write to a file at `path`.
+        path (str): File path.
+    """
+    fs = open(path, "w")
+    fs.write(text)
+    fs.close()
+    return
+
+
+def write_stdout(text, newline = True):
+    """Write text to the standard output file stream.
+    
+    A text string is written to the system standard output file stream,
+    and optionally a newline is added.
+
+    Args:
+        text (str): Output text.
+        newline (bool): Add a os specific line separator to
+            the end of the text.
+    """
+    sys.stdout.write(text)
+    if newline:
+        sys.stdout.write(os.linesep)
+    sys.stdout.flush()
+    return
+
+
+def write_stderr(text, newline = True):
+    """Write text to the standard error file stream.
+    
+    A text string is written to the system standard error file stream,
+    and optionally a newline is added.
+
+    Args:
+        text (str): Output text.
+        newline (bool): Add a os specific line separator to
+            the end of the text.
+    """
+    sys.stderr.write(text)
+    if newline:
+        sys.stderr.write(os.linesep)
+    sys.stderr.flush()
+    return
+
+
+def write_json(path, obj, default = repr):
+    """Write an object representation to a json file.
+    
+    See https://docs.python.org/3/library/json.html#json.dump
+    """
+    fs = open(path, "w")
+    fs.write(json.dumps(obj, default = default))
+    fs.close()
 
 
 class Parsable(object):
     """A class where slots are parsable.
 
     Provides methods to import and export values for data slots from dictionaries.
+
+    Use case:
+        - Get a dictionary from any object structure.
+        - Get a JSON or YAML string from any object structure.
+        - Parse a dictionary as object structure.
     """
 
     def __init__(self):
@@ -242,4 +357,3 @@ class Parsable(object):
             if key not in varnames and not add:
                 continue
             setattr(self, key, value)
-
