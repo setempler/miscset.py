@@ -3,7 +3,7 @@
 Content
 -------
 
-Browse the module for submodules, functions, classes and other objects:
+🔎 Browse the module for submodules, functions, classes and other objects:
 
 .. autosummary::
    :toctree: _autosummary

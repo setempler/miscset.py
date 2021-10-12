@@ -6,6 +6,9 @@
 Public API
 ----------
 
+Direct Imports
+``````````````
+
 Contains imports to all submodules relevant for public usage,
 so that a direct import is not necessary. This allows:
 
@@ -55,5 +58,4 @@ from . import io
 from . import sh
 from . import files
 from . import tables
-from . import version
-
+from ._version import version

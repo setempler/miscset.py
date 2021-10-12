@@ -37,7 +37,7 @@ def read_txt(path, *args, **kwargs):
     
     Args:
         path (str): A path to a file.
-        *args, **kwargs: Any other argument passed to `open`,
+        args, kwargs: Any other argument passed to `open`,
             such as mode, encoding, etc.
 
     Returns:
@@ -59,7 +59,7 @@ def read_lines(path, strip = os.linesep, *args, **kwargs):
         path (str): File path.
         strip (str): Characters to strip from the end
             of each line. `None` to skip stripping.
-        *args, **kwargs: Any other argument passed to `open`,
+        args, kwargs: Any other argument passed to `open`,
             such as mode, encoding, etc.
 
     Returns:
@@ -123,7 +123,7 @@ def read_csv(path, *args, **kwargs):
 
     Args:
         path (str): File path.
-        *args, **kwargs: Arguments passed to `pandas.read_csv`.
+        args, kwargs: Arguments passed to `pandas.read_csv`.
 
     Returns:
         DataFrame: A table containing the values read from the file.
@@ -133,12 +133,13 @@ def read_csv(path, *args, **kwargs):
 
 
 def read_xl(path, *args, **kwargs):
-    """Read any Excel file.
+    """Read an EXCEL table.
 
+    Import tables in EXCEL format.
 
     Args:
         path (str): File path.
-        *args, **kwargs: Arguments passed to `pandas.read_excel`.
+        args, kwargs: Arguments passed to `pandas.read_excel`.
 
     Returns:
         DataFrame: A table containing the values read from the file's selected sheet.

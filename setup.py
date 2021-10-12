@@ -1,15 +1,14 @@
 import setuptools
 
 
-with open("miscset/version.py", "r") as fs:
-    exec(fs.read())
+import miscset
 with open("README.md", "r", encoding = "utf-8") as fs:
     long_description = fs.read()
 
 
 setuptools.setup(
     name = "miscset",
-    version = version_string_,
+    version = miscset.version,
     author = "Sven Templer",
     author_email = "sven.templer@gmail.com",
     description = "Miscellaneous set of helpful methods.",

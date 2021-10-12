@@ -10,7 +10,9 @@
 
 * Find *data* and *time* formatting wrapper in the module `miscset.dt`.
 * Find *stream i/o* methods in the module `miscset.io`.
+* Find *filesystem* methods in the module `miscset.files`.
 * Find *subprocess* methods in the module `miscset.sh`.
+* Find *tabular data conversion* methods in the module `miscset.tables`.
 
 ## Usage
 
@@ -27,9 +29,16 @@ print(miscset.dt.now())
 # return a shell command standard output
 print(miscset.sh.run("uname").stdout)
 # >>> Darwin
+
+# convert data types to and from tables (pandas.DataFrame)
+print(miscset.tables.list_to_df([[1,2,3], ["a","b","c"]]))
+# >>>   col1 col2
+# >>> 0    1    a
+# >>> 1    2    b
+# >>> 2    3    c
 ```
 
-See all method descriptions and a full feature list on [miscset.readthedocs.io](https://miscset.readthedocs.io).
+📚 See all method descriptions and a full feature list in the documentation hosted on [miscset.readthedocs.io](https://miscset.readthedocs.io).
 
 ## Installation
 

@@ -28,11 +28,11 @@ def df_to_dict(df):
     return df.to_dict(orient = "list")
 
 
-def list_to_df(l, colnames = None, transpose = True):
+def list_to_df(lol, colnames = None, transpose = True):
     """Convert a list of list to a pandas DataFrame.
     
     Args:
-        l (list of lists): 2-dimensional list array to parse to a DataFrame.
+        lol (list of lists): 2-dimensional list array to parse to a DataFrame.
             Data is arranged row-wise, see argument `transpose`.
         colnames (list): Column names to set. If given `None`,
             create pseudo names with [col1, col2, ..., coli, ..., coln] notation.
@@ -41,7 +41,7 @@ def list_to_df(l, colnames = None, transpose = True):
     Returns:
         pandas.DataFrame
     """
-    df = pandas.DataFrame(data = l)
+    df = pandas.DataFrame(data = lol)
     if transpose:
         df = df.transpose()
     ncols = len(df.columns)
