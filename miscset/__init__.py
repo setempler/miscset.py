@@ -3,20 +3,30 @@
 
 """Main module and public API.
 
-Public API
-----------
+Version
+-------
 
-Direct Imports
-``````````````
+The library version can be identified by the `version` object.
 
-Contains imports to all submodules relevant for public usage,
-so that a direct import is not necessary. This allows:
-
-.. code-block:: python
+.. exec_code::
+    :caption: Example code:
+    :caption_output: Result:
 
     import miscset
-    miscset.sh.run("echo hello")
-    # >>> CompletedProcess(args='bash -s', returncode=0, stdout='hello\\n', stderr='')
+    print(miscset.version)
+
+Direct Imports
+--------------
+
+The module imports to all submodules relevant for public usage,
+so that a direct import is not necessary. This allows:
+
+.. exec_code::
+    :caption: Example code:
+    :caption_output: Result:
+
+    import miscset
+    print(miscset.sh.run)
 
 Logging
 -------
@@ -27,7 +37,9 @@ in methods of this package.
 The handler can be redefined by a custom python module
 importing methods from `miscset` and to custom logs:
 
-.. code-block:: python
+.. exec_code::
+    :caption: Example code:
+    :caption_output: Result:
 
     import logging
     import miscset
@@ -38,14 +50,8 @@ importing methods from `miscset` and to custom logs:
     logger.setLevel(logging.DEBUG)
 
     # this command prints now any debug messages using the log handler specified above
-    miscset.sh.run("echo hello")
-    # >>> shell stdin is echo hello
-    # >>> shell runner is ['bash -s']
-    # >>> shell stdout is
-    # >>> hello
-    # >>> shell stderr is
-    # >>> shell return code is 0
-    # >>> CompletedProcess(args='bash -s', returncode=0, stdout='hello\\n', stderr='')
+    out = miscset.sh.run("echo hello")
+    print(out)
 """
 
 
@@ -59,3 +65,5 @@ from . import sh
 from . import files
 from . import tables
 from ._version import version
+
+foo = "bar"

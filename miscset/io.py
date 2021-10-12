@@ -101,6 +101,13 @@ def read_yaml(path):
 
     Returns:
         dict: Content of a YAML file parsed as dictionary.
+
+    .. exec_code::
+        :caption: Example code:
+        :caption_output: Result:
+
+        import miscset
+        print(miscset.io.read_yaml("tests/example.yml"))
     """
     d = {}
     if not os.path.isfile(path):
@@ -215,6 +222,13 @@ def write_stdout(text, newline = True):
         text (str): Output text.
         newline (bool): Add a os specific line separator to
             the end of the text.
+
+    .. exec_code::
+        :caption: Example code:
+        :caption_output: Result:
+
+        import miscset
+        miscset.io.write_stdout("Hello, world!")
     """
     sys.stdout.write(text)
     if newline:
@@ -259,7 +273,20 @@ class Parsable(object):
     Use case:
         - Get a dictionary from any object structure.
         - Get a JSON or YAML string from any object structure.
-        - Parse a dictionary as object structure.
+        - Parse a dictionary to add/overwrite object slots with values.
+
+    .. exec_code::
+        :caption: Example code:
+        :caption_output: Result:
+
+        import miscset
+        class Container(miscset.io.Parsable):
+            def __init__(self, value):
+                self.value = value
+        c = Container([1,2,3])
+        c.import_dict({"foo": "bar"}, add = True)
+        print(c.get_json())
+
     """
 
     def __init__(self):

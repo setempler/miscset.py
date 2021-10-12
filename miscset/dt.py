@@ -36,6 +36,20 @@ def format(dt, fmt = "dt", simplified = True):
 
     Returns:
         str: The datetime object converted to a string.
+    
+    .. exec_code::
+        :caption: Example code:
+        :caption_output: Result:
+
+        import datetime
+        now = datetime.datetime.now()
+        print(f"from:  {repr(now)}")
+
+        import miscset
+        nowstr = miscset.dt.format(now)
+        print(f"to:    {nowstr}")
+        nowstr = miscset.dt.format(now, "n")
+        print(f"or to: {nowstr}")
     """
     if simplified:
         fmt = fmt.lower()
@@ -63,6 +77,14 @@ def now(fmt = "dt", simplified = True):
 
     Returns:
         str: The current time formatted as string.
+    
+    .. exec_code::
+        :caption: Example code:
+        :caption_output: Result:
+
+        import miscset
+        now = miscset.dt.now()
+        print(now)
     """
     dt = datetime.datetime.now()
     return format(dt, fmt, simplified)

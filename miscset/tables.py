@@ -40,6 +40,14 @@ def list_to_df(lol, colnames = None, transpose = True):
     
     Returns:
         pandas.DataFrame
+
+    .. exec_code::
+        :caption: Example code:
+        :caption_output: Result:
+
+        import miscset
+        print(miscset.tables.list_to_df([[1,2,3], ["a","b","c"]]))
+
     """
     df = pandas.DataFrame(data = lol)
     if transpose:

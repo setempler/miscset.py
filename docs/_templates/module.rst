@@ -53,8 +53,8 @@
 
 {% block modules %}
 {% if modules %}
-Modules
--------
+Submodules
+----------
 
 .. autosummary::
    :toctree:
