@@ -14,7 +14,7 @@ setuptools.setup(
     description = "Miscellaneous set of helpful methods.",
     long_description = long_description,
     long_description_content_type = "text/markdown",
-    url = "https://github.com/setempler/miscset.py",
+    url = "https://miscset.readthedocs.org",
     packages = setuptools.find_packages(),
     classifiers = [
         "Development Status :: 4 - Beta",
@@ -26,8 +26,6 @@ setuptools.setup(
         "Topic :: Utilities",
         "Topic :: Text Processing :: Markup :: HTML"
     ],
-    install_requires = [
-        "pyyaml"
-    ],
+    install_requires = miscset.io.read_lines("requirements.txt"),
     python_requires = ">=3.6",
 )
