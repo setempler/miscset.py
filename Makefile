@@ -16,6 +16,7 @@ init:
 
 .PHONY: install
 install:
+	@which python
 	@python setup.py install
 
 .PHONY: test
@@ -36,9 +37,17 @@ test_upload:
 	@echo test
 	@twine upload --repository testpypi dist/*
 
+.PHONY: upload-info
+upload-info:
+	@echo latest version:
+	@curl -sL https://pypi.python.org/pypi/miscset/json | python -m json.tool | grep version | grep -v python | awk '{print "  "$$2}'
+	@echo available uploads:
+	@ls dist/ | sed 's/^/  /'
+
 .PHONY: upload
-upload:
-	@echo NOT YET AVAILABLE
+upload: clean install docs test upload-info
+	@echo info:
+	@echo ' . now run twine upload dist/<your egg>'
 
 .PHONY: clean
 clean:
