@@ -17,11 +17,11 @@ init:
 .PHONY: install
 install:
 	@which python
-	@python setup.py install
+	@python setup.py install # alternative: pip install .
 
-.PHONY: test
+.PHONY: install test
 test:
-	@pytest -v
+	@pytest -v --cov=./
 
 .PHONY: docs
 docs:
@@ -58,3 +58,6 @@ clean:
 	@rm -rf build/
 	@rm -rf dist/
 	@rm -rf *.egg-info/
+	@rm -f miscset/_version.py
+	@rm -f .coverage
+
