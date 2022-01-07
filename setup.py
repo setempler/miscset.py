@@ -1,9 +1,7 @@
 import setuptools
-from miscset._version import version
 
 setuptools.setup(
     name = "miscset",
-    version = version,
     author = "Sven Templer",
     author_email = "sven.templer@gmail.com",
     description = "Miscellaneous set of helpful methods.",
