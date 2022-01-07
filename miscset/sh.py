@@ -49,14 +49,14 @@ def print_colored(text, color, reset = True):
         text (str): A text to send to print.
         color (str): An ansi color to decorate `text` with.
         reset (bool): Clear decoration at the end of `text`.
-    
+
     .. exec_code::
         :caption: Example code:
         :caption_output: Result:
 
         import miscset
         miscset.sh.print_colored("Hello, world!", miscset.sh.AnsiColor.cyan)
-    
+
     """
     text = color + text
     if reset:
