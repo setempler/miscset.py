@@ -66,4 +66,3 @@ from . import files
 from . import tables
 from ._version import version
 
-foo = "bar"
