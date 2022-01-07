@@ -6,3 +6,4 @@
 /.venv*
 /docs/_build
 /docs/_autosummary
+/miscset/_version.py
