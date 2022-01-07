@@ -19,7 +19,6 @@ setuptools.setup(
         "Topic :: Utilities",
         "Topic :: Text Processing :: Markup :: HTML"
     ],
-    #install_requires = miscset.io.read_lines("requirements.txt"),
     install_requires = open("requirements.txt").readlines(),
     python_requires = ">=3.6",
 )
